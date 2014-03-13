@@ -1,0 +1,11 @@
+#Wed Mar 05 11:42:23 CST 2014
+eclipse.preferences.version=1
+encoding//src/com/ifp/wechat/constant=UTF-8
+encoding//src/com/ifp/wechat/entity/message/req/BaseMessage.java=UTF-8
+encoding//src/com/ifp/wechat/entity/message/req/ImageMessage.java=UTF-8
+encoding//src/com/ifp/wechat/entity/message/req/LinkMessage.java=UTF-8
+encoding//src/com/ifp/wechat/entity/message/req/LocationMessage.java=UTF-8
+encoding//src/com/ifp/wechat/entity/message/req/TextMessage.java=UTF-8
+encoding//src/com/ifp/wechat/entity/message/resp=UTF-8
+encoding//src/com/ifp/wechat/util=UTF-8
+encoding/<project>=UTF-8
