@@ -4,72 +4,74 @@ WechatSDK weixin 微信全接口SDK封装 Java
 
 ### 如何使用
 1、配置微信服务号的token，修改配置文件wechat.properties
+
 参数名		参数意思
+
 token		Token, 与接口配置信息中的Token要一致
+
 appid		第三方用户唯一凭证
+
 appSecret	第三方用户唯一凭证密钥
 
 
 2、建立于微信交互的请求servlet：
+	
+	/**
+	 * 处理微信请求servlet
+	 * @author caspar.chen
+	 * @version 1.0
+	 * 
+	 */
+	public class WeChatServlet extends HttpServlet {
 
-/**
- * 处理微信请求servlet
- * @author caspar.chen
- * @version 1.0
- * 
- */
-public class WeChatServlet extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// 随机字符串
-		String echostr = request.getParameter("echostr");
-
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			// 通过检验signature对请求进行校验，若校验成功则原样返回echostr，否则接入失败
-			if (SignService.checkSignature(request)) {
-				out.print(echostr);
+		private static final long serialVersionUID = 1L;
+	
+		public void doGet(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			// 随机字符串
+			String echostr = request.getParameter("echostr");
+	
+			PrintWriter out = null;
+			try {
+				out = response.getWriter();
+				// 通过检验signature对请求进行校验，若校验成功则原样返回echostr，否则接入失败
+				if (SignService.checkSignature(request)) {
+					out.print(echostr);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				out.close();
+				out = null;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			out.close();
-			out = null;
 		}
+	
+		public void doPost(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			try {
+				request.setCharacterEncoding("UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			response.setCharacterEncoding("UTF-8");
+	
+			// 调用核心业务类接收消息、处理消息
+			String respMessage = CoreService.processWebchatRequest(request);
+	
+			// 响应消息
+			PrintWriter out = null;
+			try {
+				out = response.getWriter();
+				out.print(respMessage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				out.close();
+				out = null;
+			}
+		}
+
 	}
-
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		response.setCharacterEncoding("UTF-8");
-
-		// 调用核心业务类接收消息、处理消息
-		String respMessage = CoreService.processWebchatRequest(request);
-
-		// 响应消息
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			out.print(respMessage);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			out.close();
-			out = null;
-		}
-	}
-
-}
-
-
 3、创建处理消息的业务逻辑类
 
 	/**
@@ -151,8 +153,8 @@ public class WeChatServlet extends HttpServlet {
 	}
 
 
-到这里就已经完成了微信消息和一些事件的处理。
+只需三步就已经完成了微信消息和一些事件的处理。
 
-### 有问题可联系作者：xmlhttprequest@163.com
+有问题可联系作者：xmlhttprequest@163.com
 
 
