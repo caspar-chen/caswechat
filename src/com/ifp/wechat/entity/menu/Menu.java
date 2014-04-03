@@ -17,14 +17,17 @@ public class Menu {
 		return button;
 	}
 
+
 	public void setButton(Button[] button) {
 		this.button = button;
 	}
+
 
 	public Menu(Button[] button) {
 		super();
 		this.button = button;
 	}
+
 
 	public Menu() {
 		super();
