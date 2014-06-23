@@ -4,15 +4,9 @@ WechatSDK weixin 微信全接口SDK封装 Java
 
 只需三步就可以完成微信消息和一些事件的处理。
 
-有问题可联系作者
+有问题可联系
 
 Email：xmlhttprequest@163.com
-
-QQ：626121727
-
-如果觉得对您有帮助，也可向作者捐款
-
-支付宝账号：tuposky@sina.com
 
 ### 如何使用
 1、配置微信服务号的token，修改配置文件wechat.properties
