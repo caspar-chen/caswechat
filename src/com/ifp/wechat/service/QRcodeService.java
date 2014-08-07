@@ -33,12 +33,12 @@ public class QRcodeService {
 	/**
 	 * 二维码类型，临时
 	 */
-	static String QRCODE_SCENE = "QR_SCENE";
+	public static final String QRCODE_SCENE = "QR_SCENE";
 	
 	/**
 	 * 二维码类型，永久
 	 */
-	static String QRCODE_LIMIT_SCENE = "QR_LIMIT_SCENE";
+	public static final String QRCODE_LIMIT_SCENE = "QR_LIMIT_SCENE";
 
 	/**
 	 * 获取ticket
