@@ -100,6 +100,10 @@ public class ConstantWeChat {
 	 */
 	public static final String EVENT_TYPE_CLICK = "CLICK";
 	
+	/**
+	 * 事件类型：SCAN(二维码扫描事件)
+	 */
+	public static final String EVENT_TYPE_SCAN = "SCAN";	
 	
 	/**
 	 * OAUTH scope
