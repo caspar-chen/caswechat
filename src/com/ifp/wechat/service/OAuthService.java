@@ -123,6 +123,7 @@ public class OAuthService {
 					user = new UserWeiXin();
 					user.setOpenid(jsonObject.getString("openid"));
 					user.setNickname(jsonObject.getString("nickname"));
+					user.setHeadimgurl(jsonObject.getString("headimgurl"));
 					user.setSex(jsonObject.getInt("sex"));
 					user.setCity(jsonObject.getString("city"));
 					user.setCountry(jsonObject.getString("country"));
