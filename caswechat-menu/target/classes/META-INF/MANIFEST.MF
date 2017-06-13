@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: caswechat-menu
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: com.caspar.caswechat
+Build-Jdk: 1.6.0_43
+Built-By: caspar
+Created-By: Maven Integration for Eclipse
+Specification-Title: caswechat-menu
+Specification-Version: 1.0.0
+

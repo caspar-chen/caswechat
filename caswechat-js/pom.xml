@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.caspar.caswechat</groupId>
+		<artifactId>caswechat</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>caswechat-js</artifactId>
+	<name>${project.artifactId}</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+            <groupId>com.caspar.caswechat</groupId>
+            <artifactId>caswechat-util-general</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.caspar.caswechat</groupId>
+            <artifactId>caswechat-start</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.caspar.caswechat</groupId>
+            <artifactId>caswechat-util-redis</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+	</dependencies>
+</project>
