@@ -1,4 +1,4 @@
-WechatSDK weixin 微信全接口SDK封装 Java
+caswechat 微信全接口封装 Java
 ========================================
 微信公共平台所有接口的SDK封装 java版本，你可以使用SDK简单快速开发微信公众账号。
 
