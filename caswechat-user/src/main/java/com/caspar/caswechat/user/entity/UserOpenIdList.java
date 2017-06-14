@@ -1,5 +1,7 @@
 package com.caspar.caswechat.user.entity;
 
+import java.util.Arrays;
+
 /**
  * 用户openId列表
  * @author caspar.chen
@@ -18,11 +20,11 @@ public class UserOpenIdList {
 	/**
 	 * 	列表数据，OPENID的列表
 	 */
-	private String[] data;
+	private String[] openIds;
 	/**
 	 * 	拉取列表的最后一个用户的OPENID
 	 */
-	private String next_openid;
+	private String nextOpenid;
 
 	public Integer getTotal() {
 		return total;
@@ -40,20 +42,27 @@ public class UserOpenIdList {
 		this.count = count;
 	}
 
-	public String[] getData() {
-		return data;
+	public String[] getOpenIds() {
+		return openIds;
 	}
 
-	public void setData(String[] data) {
-		this.data = data;
+	public void setOpenIds(String[] openIds) {
+		this.openIds = openIds;
 	}
 
-	public String getNext_openid() {
-		return next_openid;
+	public String getNextOpenid() {
+		return nextOpenid;
 	}
 
-	public void setNext_openid(String next_openid) {
-		this.next_openid = next_openid;
+	public void setNextOpenid(String nextOpenid) {
+		this.nextOpenid = nextOpenid;
+	}
+
+	@Override
+	public String toString() {
+		return "UserOpenIdList [total=" + total + ", count=" + count
+				+ ", openIds=" + Arrays.toString(openIds) + ", nextOpenid="
+				+ nextOpenid + "]";
 	}
 
 }

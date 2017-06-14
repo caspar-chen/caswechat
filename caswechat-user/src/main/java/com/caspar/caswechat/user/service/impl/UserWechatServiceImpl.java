@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.caspar.caswechat.start.service.AccessTokenService;
 import com.caspar.caswechat.user.entity.UserOpenIdList;
@@ -71,7 +72,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 
 	@Override
 	public UserOpenIdList getUserOpenIdList() {
-		UserOpenIdList userOpenIdList = null;
+		UserOpenIdList userOpenIdList = new UserOpenIdList();
 		String token = accessTokenService.getAccessTokenStr();
 		if (token != null) {
 			String url = GET_USER_OPENID_LIST.replace("ACCESS_TOKEN", token)
@@ -88,8 +89,12 @@ public class UserWechatServiceImpl implements UserWechatService {
 						&& jsonObject.get("errcode") != "0") {
 					log.error("获取关注用户列表失败 errcode: : " + jsonObject.toString());
 				} else {
-					userOpenIdList = JSONObject.parseObject(responseStr,
-							UserOpenIdList.class);
+					userOpenIdList.setTotal(jsonObject.getInteger("total"));
+					userOpenIdList.setCount(jsonObject.getInteger("count"));
+					userOpenIdList.setNextOpenid(jsonObject.getString("next_openid"));
+					JSONArray openIdArr =  jsonObject.getJSONObject("data").getJSONArray("openid");
+					String[] ids = openIdArr.toArray(new String[openIdArr.size()]);
+					userOpenIdList.setOpenIds(ids);
 				}
 			}
 
@@ -104,12 +109,12 @@ public class UserWechatServiceImpl implements UserWechatService {
 		// 获取关注用户openid列表
 		UserOpenIdList userOpenId = getUserOpenIdList();
 
-		if (userOpenId == null || userOpenId.getData().length <= 0) {
+		if (userOpenId == null || userOpenId.getOpenIds().length <= 0) {
 			return null;
 		}
-		for (int i = 0; i < userOpenId.getData().length; i++) {
+		for (int i = 0; i < userOpenId.getOpenIds().length; i++) {
 			// 根据openid查询用户信息
-			UserWechat user = getUserInfo(userOpenId.getData()[i]);
+			UserWechat user = getUserInfo(userOpenId.getOpenIds()[i]);
 			if (user != null) {
 				list.add(user);
 			}
