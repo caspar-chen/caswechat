@@ -1,9 +1,31 @@
-caswechat v2.0 微信全接口封装 Java版
+Caswechat v2.0 
 ========================================
 
-封装了微信公共平台所有的接口，你可以使用caswechat简单快速开发微信公众账号。
+CasWechat is an easy to use Java framework for wechat Public Platform applications.
 
-目前2.0 分支接口还不全，在持续更新中。可切换至master分支
+You can use caswechat to quickly and easily develop wechat public platform applications.
 
-### 依赖说明
-1、redis ,用于缓存accessToken 和js票据
+The current 2.0 branch interface is still incomplete, in the ongoing update. You can switch to the master branch.
+
+Very much hope you contribute your code in caswechat.
+
+## Getting started
+You can refer to our [demo](https://github.com/caspar-chen/caswechat/tree/2.0/caswechat-demo) to provide rapid development
+
+Modify your own information in the [wechat.properties](https://github.com/caspar-chen/caswechat/blob/2.0/caswechat-demo/src/resource/properties/wechat.properties)
+
+Modify your token, appId and appSecret, and the other should not be modified
+
+```gradle
+token = your token ,Match the token you fill in the backstage  of the wechat
+appId = your appId
+appSecret = your appSecret
+```
+OK, now you can run the [test](https://github.com/caspar-chen/caswechat/tree/2.0/caswechat-demo/src/main/java/com/caspar/caswechat/demo/test) folder inside the main method to test
+
+## Dependency instructions
+- Redis , Used to cache accessToken and js tickets
+
+
+## License
+caswechat is under the MIT license. See the [LICENSE](https://github.com/caspar-chen/caswechat/blob/2.0/LICENSE.TXT) file for details.
