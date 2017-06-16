@@ -1,1 +1,6 @@
-com\caspar\caswechat\menu\App.class
+com\caspar\caswechat\menu\service\WechatMenuService.class
+com\caspar\caswechat\menu\entity\WechatMenu.class
+com\caspar\caswechat\menu\entity\ConditionalMenu.class
+com\caspar\caswechat\menu\entity\WechatButton.class
+com\caspar\caswechat\menu\service\impl\WechatMenuServiceImpl.class
+com\caspar\caswechat\menu\entity\MenuMatchRule.class
