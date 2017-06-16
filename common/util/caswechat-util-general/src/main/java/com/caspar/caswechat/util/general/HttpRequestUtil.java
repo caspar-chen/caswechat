@@ -35,13 +35,14 @@ import com.alibaba.fastjson.JSONObject;
 public class HttpRequestUtil {
 
 	private CloseableHttpClient httpClient;
-
+	private static final String DEFAULT_ENCODING = StandardCharsets.UTF_8.name();
+	
 	private final static Map<String, String> DEFAULT_HEADERS_FORM_UTF8 = new HashMap<String, String>();
 	static {
 		DEFAULT_HEADERS_FORM_UTF8.put(HttpHeaders.CONTENT_TYPE,
 				"application/x-www-form-urlencoded");
 		DEFAULT_HEADERS_FORM_UTF8.put(HttpHeaders.CONTENT_ENCODING,
-				StandardCharsets.UTF_8.name());
+				DEFAULT_ENCODING);
 	}
 
 	private final static Map<String, String> DEFAULT_HEADERS_JSON_UTF8 = new HashMap<String, String>();
@@ -49,12 +50,12 @@ public class HttpRequestUtil {
 		DEFAULT_HEADERS_JSON_UTF8.put(HttpHeaders.CONTENT_TYPE,
 				"application/json");
 		DEFAULT_HEADERS_JSON_UTF8.put(HttpHeaders.CONTENT_ENCODING,
-				StandardCharsets.UTF_8.name());
+				DEFAULT_ENCODING);
 	}
 
 	public static HttpRequestUtil createDefault() {
 		return new HttpRequestUtil(5000, 5000, 5000,
-				StandardCharsets.UTF_8.name());
+				DEFAULT_ENCODING);
 	}
 
 	public HttpRequestUtil(int connectionRequestTimeout, int connectionTimeout,
@@ -92,7 +93,7 @@ public class HttpRequestUtil {
 		try {
 			response = httpClient.execute(request);
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				content = EntityUtils.toString(response.getEntity());
+				content = EntityUtils.toString(response.getEntity(),DEFAULT_ENCODING);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -127,7 +128,7 @@ public class HttpRequestUtil {
 			}
 			try {
 				request.setEntity(new UrlEncodedFormEntity(list,
-						StandardCharsets.UTF_8.name()));
+						DEFAULT_ENCODING));
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
@@ -139,8 +140,8 @@ public class HttpRequestUtil {
 		HttpPost request = new HttpPost(url);
 		if (param != null) {
 			// 设置发送消息的参数
-			StringEntity entity = new StringEntity(param, StandardCharsets.UTF_8.name());
-			entity.setContentEncoding(StandardCharsets.UTF_8.name());
+			StringEntity entity = new StringEntity(param, DEFAULT_ENCODING);
+			entity.setContentEncoding(DEFAULT_ENCODING);
 			entity.setContentType("application/json");
 			request.setEntity(entity);
 		}
