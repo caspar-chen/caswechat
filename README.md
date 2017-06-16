@@ -1,4 +1,4 @@
-Caswechat v2.0 
+CasWechat v2.0 
 ========================================
 
 CasWechat is an easy to use Java framework for wechat Public Platform applications.
