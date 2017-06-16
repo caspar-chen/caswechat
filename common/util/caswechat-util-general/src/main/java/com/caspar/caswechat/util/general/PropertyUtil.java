@@ -13,6 +13,8 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.io.Resource;
 
@@ -37,6 +39,9 @@ import org.springframework.core.io.Resource;
  */
 	
 public class PropertyUtil extends PropertyPlaceholderConfigurer {
+	
+	private static final Logger log = LoggerFactory
+			.getLogger(PropertyUtil.class);
 	
 	public static final String LINE_SEPARATOR = System.getProperty("line.separator", "\n");  
 	private static Properties FIXED_PROPERTIES = new Properties();
@@ -135,7 +140,7 @@ public class PropertyUtil extends PropertyPlaceholderConfigurer {
 			;
 		}
 		sBuilder.append(LINE_SEPARATOR).append("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
-		System.out.println(sBuilder.toString());
+		log.debug(sBuilder.toString());
 	}
 	
 	public void setReversed(boolean reversed) {
