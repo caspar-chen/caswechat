@@ -13,10 +13,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.caspar.caswechat.js.entity.JSSign;
 import com.caspar.caswechat.js.service.JsService;
 import com.caspar.caswechat.start.service.AccessTokenService;
+import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
 import com.caspar.caswechat.util.general.StringUtil;
-import com.caspar.caswechat.util.general.http.HttpRequester;
-import com.caspar.caswechat.util.general.http.Response;
 import com.caspar.caswechat.util.redis.RedisHelper;
 
 /**
@@ -43,15 +42,9 @@ public class JsServiceImpl implements JsService{
 		if(StringUtil.isNotEmpty(jsApiTicket)){
 			return jsApiTicket;
 		}
-		
 		String url = PropertyUtil.get("url_js_ticket_get")
 				.replace("ACCESS_TOKEN", accessToken);
-		HttpRequester request = HttpRequester.createDefault();
-		Response response = request.get(url);
-		String responseStr = response.getContent();
-
-		JSONObject jsonObject = JSONObject.parseObject(responseStr);
-		
+		JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 		if (jsonObject != null) {
 			if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
 					&& jsonObject.getIntValue("errcode")!=0) {

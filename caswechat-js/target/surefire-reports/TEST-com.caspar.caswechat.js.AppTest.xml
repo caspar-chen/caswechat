@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="D:\Workspaces\.metadata\.plugins\org.eclipse.m2e.core\launches\m2conf7642255619362783821.tmp"/>
+    <property name="classworlds.conf" value="D:\Workspaces\.metadata\.plugins\org.eclipse.m2e.core\launches\m2conf2679531659963369125.tmp"/>
     <property name="sun.jnu.encoding" value="GBK"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_121\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\Java\jdk1.8.0_121\jre\bin;D:\sdk\scala-2.10.6\bin;D:\ProgramFiles\apache-maven-3.3.9-bin\bin;D:\shortcut;D:\ProgramFiles\Python34;D:\ProgramFiles\Python34\Scripts;D:\Tools\redis-latest;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
