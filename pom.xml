@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.caspar.caswechat</groupId>
@@ -14,16 +15,18 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
 		<spring.version>4.3.2.RELEASE</spring.version>
+		<logback.version>1.2.1</logback.version>
 	</properties>
 	<modules>
 		<module>common/util/caswechat-util-general</module>
-        <module>common/util/caswechat-util-redis</module>
+		<module>common/util/caswechat-util-redis</module>
 		<module>caswechat-start</module>
 		<module>caswechat-menu</module>
 		<module>caswechat-web</module>
 		<module>caswechat-user</module>
-        <module>caswechat-js</module>
-  </modules>
+		<module>caswechat-js</module>
+		<module>caswechat-demo</module>
+	</modules>
 
 	<dependencies>
 		<dependency>
@@ -56,17 +59,28 @@
 			<version>2.6</version>
 		</dependency>
 
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.21</version>
-		</dependency>
+		<dependency>  
+		  <groupId>ch.qos.logback</groupId>  
+		  <artifactId>logback-core</artifactId>  
+		  <version>${logback.version}</version>  
+		</dependency>  
+		<dependency>  
+		  <groupId>ch.qos.logback</groupId>  
+		  <artifactId>logback-classic</artifactId>  
+		  <version>${logback.version}</version>  
+		</dependency>  
+		  
+		<dependency>  
+		  <groupId>ch.qos.logback</groupId>  
+		  <artifactId>logback-access</artifactId>  
+		  <version>${logback.version}</version>  
+		</dependency>  
+		  
+		<dependency>  
+		  <groupId>org.slf4j</groupId>  
+		  <artifactId>slf4j-api</artifactId>  
+		  <version>1.7.21</version>  
+		</dependency>  
 
 
 		<!-- commons end -->
