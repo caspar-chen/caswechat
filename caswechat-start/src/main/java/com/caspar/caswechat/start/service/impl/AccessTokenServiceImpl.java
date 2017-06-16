@@ -9,10 +9,9 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.caspar.caswechat.start.entity.AccessToken;
 import com.caspar.caswechat.start.service.AccessTokenService;
+import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
 import com.caspar.caswechat.util.general.StringUtil;
-import com.caspar.caswechat.util.general.http.HttpRequester;
-import com.caspar.caswechat.util.general.http.Response;
 import com.caspar.caswechat.util.redis.RedisHelper;
 
 /**
@@ -58,14 +57,10 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 		if(StringUtil.isNotEmpty(tokenStr)){
 			return JSONObject.parseObject(tokenStr, AccessToken.class);
 		}
-		String requestUrl = URL_ACCESS_TOKEN.replace("APPID",
+		String url = URL_ACCESS_TOKEN.replace("APPID",
 				PropertyUtil.get("appId")).replace("APPSECRET",
 				PropertyUtil.get("appSecret"));
-		HttpRequester request = HttpRequester.createDefault();
-		Response response = request.get(requestUrl);
-		String responseStr = response.getContent();
-
-		JSONObject jsonObject = JSONObject.parseObject(responseStr);
+		JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 		AccessToken accessToken = null;
 		// 如果请求成功
 		if (jsonObject != null) {
