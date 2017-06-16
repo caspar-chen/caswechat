@@ -3,16 +3,16 @@ package com.caspar.caswechat.web.service.impl;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.caspar.caswechat.user.entity.UserWechat;
 import com.caspar.caswechat.util.general.ConstantWeChat;
+import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
 import com.caspar.caswechat.util.general.StringUtil;
-import com.caspar.caswechat.util.general.http.HttpRequester;
-import com.caspar.caswechat.util.general.http.Response;
 import com.caspar.caswechat.web.entity.AccessTokenOAuth;
 import com.caspar.caswechat.web.service.OAuthService;
 
@@ -23,7 +23,8 @@ import com.caspar.caswechat.web.service.OAuthService;
 @Service
 public class OAuthServiceImpl implements OAuthService{
 
-	public static Logger log = Logger.getLogger(OAuthService.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(OAuthService.class);
 
 	/**
 	 * wechat oauth url
@@ -83,10 +84,7 @@ public class OAuthServiceImpl implements OAuthService{
 				.replace("SECRET", ConstantWeChat.APPSECRET)
 				.replace("CODE", code);
 
-		HttpRequester request = HttpRequester.createDefault();
-		Response response = request.get(url);
-		String responseStr = response.getContent();
-		JSONObject jsonObject = JSONObject.parseObject(responseStr);
+		JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 
 		AccessTokenOAuth accessTokenOAuth = null;
 		if (null != jsonObject) {
@@ -94,7 +92,7 @@ public class OAuthServiceImpl implements OAuthService{
 					&& !"0".equals(jsonObject.get("errcode"))) {
 				log.error("获取access_token失败 " + jsonObject.toString());
 			} else {
-				accessTokenOAuth = JSONObject.parseObject(responseStr,
+				accessTokenOAuth = JSONObject.toJavaObject(jsonObject,
 						AccessTokenOAuth.class);
 			}
 		}
@@ -115,17 +113,13 @@ public class OAuthServiceImpl implements OAuthService{
 			String url = GET_USER_INFO_OAUTH.replace("ACCESS_TOKEN", token)
 					.replace("OPENID", openid);
 
-			HttpRequester request = HttpRequester.createDefault();
-			Response response = request.get(url);
-			String responseStr = response.getContent();
-			JSONObject jsonObject = JSONObject.parseObject(responseStr);
+			JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 			if (null != jsonObject) {
 				if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
 						&& !"0".equals(jsonObject.get("errcode"))) {
 					log.error("获取用户信息失败 : " + jsonObject.toString());
 				} else {
-					user = JSONObject
-							.parseObject(responseStr, UserWechat.class);
+					user = JSONObject.toJavaObject(jsonObject, UserWechat.class);
 				}
 			}
 		}

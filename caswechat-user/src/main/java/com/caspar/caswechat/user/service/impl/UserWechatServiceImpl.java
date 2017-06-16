@@ -14,10 +14,9 @@ import com.caspar.caswechat.start.service.AccessTokenService;
 import com.caspar.caswechat.user.entity.UserOpenIdList;
 import com.caspar.caswechat.user.entity.UserWechat;
 import com.caspar.caswechat.user.service.UserWechatService;
+import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
 import com.caspar.caswechat.util.general.StringUtil;
-import com.caspar.caswechat.util.general.http.HttpRequester;
-import com.caspar.caswechat.util.general.http.Response;
 
 /**
  * @author caspar.chen
@@ -49,20 +48,15 @@ public class UserWechatServiceImpl implements UserWechatService {
 		if (token != null) {
 			String url = GET_USER_INFO.replace("ACCESS_TOKEN", token).replace(
 					"OPENID", openid);
-			HttpRequester request = HttpRequester.createDefault();
-			Response response = request.get(url);
-			String responseStr = response.getContent();
-
-			JSONObject jsonObject = JSONObject.parseObject(responseStr);
+			JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 
 			if (null != jsonObject) {
 				if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
 						&& !"0".equals(jsonObject.get("errcode"))) {
 					log.error("获取用户信息失败 : " + jsonObject.toString());
-					System.out.println("获取用户信息失败 : " + jsonObject.toString());
 				} else {
 					user = JSONObject
-							.parseObject(responseStr, UserWechat.class);
+							.toJavaObject(jsonObject, UserWechat.class);
 				}
 			}
 
@@ -78,11 +72,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 			String url = GET_USER_OPENID_LIST.replace("ACCESS_TOKEN", token)
 					.replace("NEXT_OPENID", "");
 
-			HttpRequester request = HttpRequester.createDefault();
-			Response response = request.get(url);
-			String responseStr = response.getContent();
-
-			JSONObject jsonObject = JSONObject.parseObject(responseStr);
+			JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 
 			if (null != jsonObject) {
 				if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
