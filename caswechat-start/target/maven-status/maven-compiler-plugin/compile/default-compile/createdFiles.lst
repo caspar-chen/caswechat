@@ -1,5 +1,0 @@
-com\caspar\caswechat\start\entity\AccessToken.class
-com\caspar\caswechat\start\service\SingService.class
-com\caspar\caswechat\start\service\impl\AccessTokenServiceImpl.class
-com\caspar\caswechat\start\service\AccessTokenService.class
-com\caspar\caswechat\start\service\impl\SignServiceImpl.class

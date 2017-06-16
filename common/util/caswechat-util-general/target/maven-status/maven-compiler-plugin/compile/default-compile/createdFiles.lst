@@ -1,9 +1,0 @@
-com\caspar\caswechat\util\general\MyX509TrustManager.class
-com\caspar\caswechat\util\general\StringUtil.class
-com\caspar\caswechat\util\general\ArrayUtil.class
-com\caspar\caswechat\util\general\http\DefaultResponseHandler.class
-com\caspar\caswechat\util\general\http\Response.class
-com\caspar\caswechat\util\general\ConstantWeChat.class
-com\caspar\caswechat\util\general\http\HttpRequester.class
-com\caspar\caswechat\util\general\WechatUtil.class
-com\caspar\caswechat\util\general\PropertyUtil.class
