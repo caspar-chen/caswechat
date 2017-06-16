@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+      http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd  
+">
+    <context:component-scan base-package="com.caspar.caswechat,com.champion.youth" /> 
+    
+	<!-- 扫描属性文件，默认:最下方覆盖上方 -->
+	<bean class="com.caspar.caswechat.util.general.PropertyUtil">
+		<property name="locations">
+			<list>
+				<value>classpath*:properties/*.properties</value>
+				<value>file:d:/configs/caswechat/*.properties</value>
+				<value>file:/usr/configs/caswechat/*.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- 引入文件 -->
+ 	<import resource="spring-redis.xml"/>
+</beans>
+
+
+
+
+
+
+
+

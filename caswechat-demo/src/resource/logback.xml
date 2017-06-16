@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+	<!-- 应用名称 -->
+	<property name="app.name" value="caswechat-demo" />
+	<!--日志文件的保存路径 -->
+	<property name="log.dir" value="/logs/${app.name}" />
+	<!-- 日志输出格式 -->
+	<property name="encoder_pattern"
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{80} - %msg%n" />
+		
+	<contextName>${app.name}</contextName>
+
+	<!-- 控制台日志：输出全部日志到控制台 -->
+	<appender name="CONSOLE_OUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${encoder_pattern}</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- 文件日志：输出全部日志到文件 -->
+	<appender name="OUT_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 日志文件名 -->
+			<fileNamePattern>${log.dir}/%d{yyyy-MM-dd}.output.log</fileNamePattern>
+			<!-- 归档文件的最大日期（天） -->
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${encoder_pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 错误日志：用于将错误日志输出到独立文件 -->
+	<appender name="ERROR_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 日志文件名 -->
+			<fileNamePattern>${log.dir}/%d{yyyy-MM-dd}.error.log</fileNamePattern>
+			<!-- 归档文件的最大日期（天） -->
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${encoder_pattern}</pattern>
+		</encoder>
+		<!-- 筛选日志级别 -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+	</appender>
+	
+	<root>
+        <level value="DEBUG" />
+        <appender-ref ref="CONSOLE_OUT" />
+        <appender-ref ref="OUT_FILE" />
+        <appender-ref ref="ERROR_FILE" />
+    </root>
+</configuration>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+							http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+">
+	<!-- jedis 连接配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.pool.maxTotal}" />
+		<property name="maxIdle" value="${redis.pool.maxIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${redis.pool.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${redis.pool.minEvictableIdleTimeMillis}" />
+		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+		<property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}" />
+		<property name="blockWhenExhausted" value="${redis.pool.blockWhenExhausted}" />
+	</bean>
+
+	<!-- slave1 -->
+	<bean id="redis-slave-1" class="org.springframework.data.redis.connection.RedisNode">
+		<constructor-arg  index="0"  value="${redis.pool.host.slave.1}" />
+		<constructor-arg  index="1" value="${redis.pool.port.slave.1}"
+			type="int" />
+	</bean>
+
+	<!-- 集群配置 -->
+	<bean id="redisSentinelConfiguration"
+        class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <property name="sentinels">
+            <set>
+            	<!-- 多个slave，直接在下面叠加 -->
+            	<ref bean="redis-slave-1" />
+            </set>
+        </property>
+    </bean>
+
+	<!-- jedis连接工厂 -->
+	<bean id="jedisConnFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<!-- 主库 -->
+		<property name="hostName" value="${redis.pool.host.master}"/>
+        <property name="port" value="${redis.pool.port.master}"/>
+        <property name="usePool" value="false"/>
+		<constructor-arg ref="redisSentinelConfiguration" />
+		<constructor-arg ref="jedisPoolConfig" />
+	</bean>
+	
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connection-factory-ref="jedisConnFactory" />
+	
+	<!-- redis工具类 -->
+	<bean id="redisHelper" class="com.caspar.caswechat.util.redis.RedisHelper">
+		<property name="redisTemplate" ref="redisTemplate" />
+		<property name="returnSetValue" value="false" />
+	</bean>
+
+</beans>
