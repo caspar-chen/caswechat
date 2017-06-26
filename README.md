@@ -1,5 +1,8 @@
+
 CasWechat v2.0 
 ========================================
+
+[中 文 文 档](https://github.com/caspar-chen/caswechat/blob/2.0/README_CN.md)
 
 CasWechat is an easy to use Java framework for wechat Public Platform applications.
 
@@ -25,7 +28,7 @@ OK, now you can run the [test](https://github.com/caspar-chen/caswechat/tree/2.0
 
 ## Dependency instructions
 - Redis , Used to cache accessToken and js tickets
-
+- Spring
 
 ## License
 caswechat is under the MIT license. See the [LICENSE](https://github.com/caspar-chen/caswechat/blob/2.0/LICENSE.TXT) file for details.
