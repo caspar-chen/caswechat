@@ -35,7 +35,7 @@ public class WechatServerServiceImpl implements WechatServerService{
 	@Override
 	public List<String> getServerIpList() {
 		String token = accessTokenService.getAccessTokenStr();
-		List<String> ipList = new ArrayList<>();
+		List<String> ipList = new ArrayList<String>();
 		if (token != null) {
 			String url = URL_SERVER_IP_LIST.replace("ACCESS_TOKEN", token);
 			JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
