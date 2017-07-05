@@ -49,7 +49,6 @@ public class StringUtil extends StringUtils {
 
     /**
      * 获取当前时间戳
-     * @return
      */
 	public static Long getTimestamp() {
         return System.currentTimeMillis() / 1000;
@@ -57,8 +56,6 @@ public class StringUtil extends StringUtils {
 	
 	/**
 	 * byte 转为 16进制
-	 * @param hash
-	 * @return
 	 */
 	public static String byteToHex(final byte[] hash) {
         Formatter formatter = new Formatter();
@@ -73,7 +70,6 @@ public class StringUtil extends StringUtils {
 	 * md5加密，编码为utf-8
 	 * @param param 
 	 * @param source
-	 * @return: String
 	 */
 	public static String getMD5(String source) {
 		if (source == null || source == "") {

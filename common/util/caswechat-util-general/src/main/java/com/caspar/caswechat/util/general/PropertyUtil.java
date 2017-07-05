@@ -20,24 +20,12 @@ import org.springframework.core.io.Resource;
 
 /**
  * 属性常量读取
-   <bean class="this class">
-    	<property name="reversed" value="false" />
-        <property name="locations">
-        	<list>
-				<value>CLASSPATH*:1.properties</value>
-				<value>FILE:x:/1.properties</value>
-				<value>FILE:x:/2.properties</value>
-        	</list>
-        </property>
-    </bean>
-    reversed = false ,逆序 ,下覆盖上 ,默认缺省
-    reversed =  true ,正序 ,上覆盖下
-    
+ * reversed = false ,逆序 ,下覆盖上 ,默认缺省<br>
+ * reversed =  true ,正序 ,上覆盖下
  * @author caspar.chen
  * @version 1.0.0, 2016-9-26
  * @see PropertyPlaceholderConfigurer
  */
-	
 public class PropertyUtil extends PropertyPlaceholderConfigurer {
 	
 	private static final Logger log = LoggerFactory

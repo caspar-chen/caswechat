@@ -4,7 +4,7 @@ package com.caspar.caswechat.util.general;
 /**
  * 微信常量
  * @author caspar.chen
- * @version 1.0
+ * @version 1.0.0
  */
 public class ConstantWeChat {
 	

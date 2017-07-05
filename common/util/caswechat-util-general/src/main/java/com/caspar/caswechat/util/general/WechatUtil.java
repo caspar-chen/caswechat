@@ -3,6 +3,8 @@ package com.caspar.caswechat.util.general;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * 微信工具类
  * @author caspar.chen
@@ -14,7 +16,7 @@ public class WechatUtil {
 	 * 替换emoji表情
 	 * @param source	要替换的字符串
 	 * @param symbol	需要替换的符号
-	 * @return
+	 * @return 替换好后的字符串
 	 */
 	public static String replaceEmoji(String source,String symbol) {  
         if(StringUtil.isEmpty(source)){
@@ -27,4 +29,29 @@ public class WechatUtil {
         }
        return source;  
     }
+	
+	/**
+	 * 检查返回结果是否正确
+	 * @param jsonObject
+	 * @return 如果正确，则返回true,否则返回false
+	 */
+	public static boolean isSuccess(JSONObject jsonObject){
+		if(jsonObject == null){
+			return false;
+		}
+		if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
+				&& !(jsonObject.getIntValue("errcode") == 0)) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * 检查返回结果是否错误
+	 * @param jsonObject
+	 * @return 如果错误，则返回true,否则返回false
+	 */
+	public static boolean isError(JSONObject jsonObject){
+		return !isSuccess(jsonObject);
+	}
 }

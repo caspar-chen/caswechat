@@ -65,6 +65,7 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 		// 如果请求成功
 		if (jsonObject != null) {
 			try {
+				System.out.println(jsonObject.toJSONString());
 				accessToken = new AccessToken();
 				accessToken.setToken(jsonObject.getString("access_token"));
 				accessToken.setExpiresIn(jsonObject.getInteger("expires_in"));
