@@ -11,8 +11,8 @@ import com.caspar.caswechat.start.entity.AccessToken;
 import com.caspar.caswechat.start.service.AccessTokenService;
 import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
-import com.caspar.caswechat.util.general.StringUtil;
 import com.caspar.caswechat.util.redis.RedisHelper;
+import com.caspar.hoe.StringHoe;
 
 /**
  * AccessToken服务
@@ -54,7 +54,7 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 	public AccessToken getAccessToken() {
 		//缓存在redis中，设置过期时间为2小时以内，因为token过期时间是7200秒=2小时，而且一天只有200次请求次数
 		String tokenStr = redisHelper.getString(accessTokenkey);
-		if(StringUtil.isNotEmpty(tokenStr)){
+		if(StringHoe.isNotEmpty(tokenStr)){
 			return JSONObject.parseObject(tokenStr, AccessToken.class);
 		}
 		String url = URL_ACCESS_TOKEN.replace("APPID",

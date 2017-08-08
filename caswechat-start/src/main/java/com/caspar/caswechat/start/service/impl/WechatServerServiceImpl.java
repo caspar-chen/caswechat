@@ -14,7 +14,7 @@ import com.caspar.caswechat.start.service.AccessTokenService;
 import com.caspar.caswechat.start.service.WechatServerService;
 import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
-import com.caspar.caswechat.util.general.StringUtil;
+import com.caspar.hoe.StringHoe;
 
 /**
  * @author caspar.chen
@@ -40,7 +40,7 @@ public class WechatServerServiceImpl implements WechatServerService{
 			String url = URL_SERVER_IP_LIST.replace("ACCESS_TOKEN", token);
 			JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 			if (null != jsonObject) {
-				if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
+				if (StringHoe.isNotEmpty(jsonObject.getString("errcode"))
 						&& !"0".equals(jsonObject.get("errcode"))) {
 					log.error("获取服务器IP列表失败 : " + jsonObject.toString());
 				} else {

@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
+import com.caspar.hoe.StringHoe;
 
 /**
  * http请求工具类
@@ -118,7 +119,7 @@ public class HttpRequestUtil {
 
 	public JSONObject doGetToJsonObject(String url) {
 		String responseStr = doGet(url);
-		if(StringUtil.isEmpty(responseStr)){
+		if(StringHoe.isEmpty(responseStr)){
 			return null;
 		}
 		return JSONObject.parseObject(responseStr);
@@ -145,7 +146,7 @@ public class HttpRequestUtil {
 	}
 
 	public String doPost(String url, String param) {
-		if(StringUtil.isEmpty(url)){
+		if(StringHoe.isEmpty(url)){
 			return null;
 		}
 		HttpPost request = new HttpPost(url.trim());

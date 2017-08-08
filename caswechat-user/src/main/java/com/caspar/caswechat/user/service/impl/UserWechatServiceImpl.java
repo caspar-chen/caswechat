@@ -17,8 +17,8 @@ import com.caspar.caswechat.user.entity.UserWechat;
 import com.caspar.caswechat.user.service.UserWechatService;
 import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
-import com.caspar.caswechat.util.general.StringUtil;
 import com.caspar.caswechat.util.general.WechatUtil;
+import com.caspar.hoe.StringHoe;
 
 /**
  * @author caspar.chen
@@ -86,7 +86,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 		String token = accessTokenService.getAccessTokenStr();
 
 		if (token != null) {
-			nextOpenId = StringUtil.isEmpty(nextOpenId) ? "" : nextOpenId;
+			nextOpenId = StringHoe.isEmpty(nextOpenId) ? "" : nextOpenId;
 			String url = GET_USER_OPENID_LIST.replace("ACCESS_TOKEN", token)
 					.replace("NEXT_OPENID", nextOpenId);
 
@@ -146,7 +146,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 			String result = HttpRequestUtil.createDefault().doPost(url,
 					postJson);
 
-			if (StringUtil.isNotEmpty(result)) {
+			if (StringHoe.isNotEmpty(result)) {
 				JSONObject jsonObject = JSONObject.parseObject(result);
 				if (WechatUtil.isError(jsonObject)) {
 					log.error("创建标签失败 : " + jsonObject.toString());
@@ -192,7 +192,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 			String result = HttpRequestUtil.createDefault().doPost(url,
 					postJson);
 
-			if (StringUtil.isNotEmpty(result)) {
+			if (StringHoe.isNotEmpty(result)) {
 				JSONObject jsonObject = JSONObject.parseObject(result);
 				if (WechatUtil.isError(jsonObject)) {
 					log.error("修改标签失败 : " + jsonObject.toString());
@@ -215,7 +215,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 			String result = HttpRequestUtil.createDefault().doPost(url,
 					postJson);
 
-			if (StringUtil.isNotEmpty(result)) {
+			if (StringHoe.isNotEmpty(result)) {
 				JSONObject jsonObject = JSONObject.parseObject(result);
 				if (WechatUtil.isError(jsonObject)) {
 					log.error("删除标签失败 : " + jsonObject.toString());
@@ -232,7 +232,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 		UserOpenIdList userOpenIdList = new UserOpenIdList();
 		String token = accessTokenService.getAccessTokenStr();
 		if (token != null) {
-			nextOpenId = StringUtil.isEmpty(nextOpenId) ? "" : nextOpenId;
+			nextOpenId = StringHoe.isEmpty(nextOpenId) ? "" : nextOpenId;
 			String url = USER_TAG_USER.replace("ACCESS_TOKEN", token);
 			// 组件post json字符串
 			String postJson = "{\"tagid\" : " + tagId + ",\"next_openid\" : \""
@@ -241,7 +241,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 			String result = HttpRequestUtil.createDefault().doPost(url,
 					postJson);
 			System.out.println(result);
-			if (StringUtil.isNotEmpty(result)) {
+			if (StringHoe.isNotEmpty(result)) {
 				JSONObject jsonObject = JSONObject.parseObject(result);
 				if (WechatUtil.isError(jsonObject)) {
 					log.error("获取标签用户列表失败: " + jsonObject.toString());
@@ -280,7 +280,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 			String url = USER_TAG_USER_BATCH_ADD.replace("ACCESS_TOKEN", token);
 			String result = HttpRequestUtil.createDefault().doPost(url,
 					postJson.toString());
-			if (StringUtil.isNotEmpty(result)) {
+			if (StringHoe.isNotEmpty(result)) {
 				JSONObject jsonObject = JSONObject.parseObject(result);
 				if (WechatUtil.isError(jsonObject)) {
 					log.error("批量为用户打标签失败 : " + jsonObject.toString());
@@ -309,7 +309,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 			String result = HttpRequestUtil.createDefault().doPost(url,
 					postJson.toString());
 
-			if (StringUtil.isNotEmpty(result)) {
+			if (StringHoe.isNotEmpty(result)) {
 				JSONObject jsonObject = JSONObject.parseObject(result);
 				if (WechatUtil.isError(jsonObject)) {
 					log.error("批量为用户取消标签失败 : " + jsonObject.toString());
@@ -331,7 +331,7 @@ public class UserWechatServiceImpl implements UserWechatService {
 			String result = HttpRequestUtil.createDefault().doPost(url,
 					postJson);
 
-			if (StringUtil.isNotEmpty(result)) {
+			if (StringHoe.isNotEmpty(result)) {
 				JSONObject jsonObject = JSONObject.parseObject(result);
 				if (WechatUtil.isError(jsonObject)) {
 					log.error("获取用户标签失败 : " + jsonObject.toString());

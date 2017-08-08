@@ -15,8 +15,10 @@ import com.caspar.caswechat.js.service.JsService;
 import com.caspar.caswechat.start.service.AccessTokenService;
 import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
-import com.caspar.caswechat.util.general.StringUtil;
+import com.caspar.caswechat.util.general.WechatUtil;
 import com.caspar.caswechat.util.redis.RedisHelper;
+import com.caspar.hoe.RandomHoe;
+import com.caspar.hoe.StringHoe;
 
 /**
  * @author caspar.chen
@@ -39,14 +41,14 @@ public class JsServiceImpl implements JsService{
 	@Override
 	public String getJsApiTicket(String accessToken) {
 		String jsApiTicket = redisHelper.getString(jsApiTicketKey);
-		if(StringUtil.isNotEmpty(jsApiTicket)){
+		if(StringHoe.isNotEmpty(jsApiTicket)){
 			return jsApiTicket;
 		}
 		String url = PropertyUtil.get("url_js_ticket_get")
 				.replace("ACCESS_TOKEN", accessToken);
 		JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 		if (jsonObject != null) {
-			if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
+			if (StringHoe.isNotEmpty(jsonObject.getString("errcode"))
 					&& jsonObject.getIntValue("errcode")!=0) {
 				log.error("获取ticket失败 : " + jsonObject.toString());
 			} else {
@@ -64,8 +66,8 @@ public class JsServiceImpl implements JsService{
 
 	@Override
 	public JSSign getJsSign(String accessToken, String jsapiTicket, String url) {
-		String nonceStr = StringUtil.getUUID();
-        Long timestamp = StringUtil.getTimestamp();
+		String nonceStr = RandomHoe.uuid();
+        Long timestamp = System.currentTimeMillis() / 1000;
         String string1;
         String signature = "";
         //注意这里参数名必须全部小写，且必须有序
@@ -77,7 +79,7 @@ public class JsServiceImpl implements JsService{
             MessageDigest crypt = MessageDigest.getInstance("SHA-1");
             crypt.reset();
             crypt.update(string1.getBytes("UTF-8"));
-            signature = StringUtil.byteToHex(crypt.digest());
+            signature = WechatUtil.byteToHex(crypt.digest());
         }catch (NoSuchAlgorithmException e){
             e.printStackTrace();
         }catch (UnsupportedEncodingException e){

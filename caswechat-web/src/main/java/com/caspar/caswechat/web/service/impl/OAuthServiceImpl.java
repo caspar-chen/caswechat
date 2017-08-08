@@ -12,9 +12,9 @@ import com.caspar.caswechat.user.entity.UserWechat;
 import com.caspar.caswechat.util.general.ConstantWeChat;
 import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
-import com.caspar.caswechat.util.general.StringUtil;
 import com.caspar.caswechat.web.entity.AccessTokenOAuth;
 import com.caspar.caswechat.web.service.OAuthService;
+import com.caspar.hoe.StringHoe;
 
 /**
  * @author caspar.chen
@@ -88,7 +88,7 @@ public class OAuthServiceImpl implements OAuthService{
 
 		AccessTokenOAuth accessTokenOAuth = null;
 		if (null != jsonObject) {
-			if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
+			if (StringHoe.isNotEmpty(jsonObject.getString("errcode"))
 					&& !"0".equals(jsonObject.get("errcode"))) {
 				log.error("获取access_token失败 " + jsonObject.toString());
 			} else {
@@ -115,7 +115,7 @@ public class OAuthServiceImpl implements OAuthService{
 
 			JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 			if (null != jsonObject) {
-				if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
+				if (StringHoe.isNotEmpty(jsonObject.getString("errcode"))
 						&& !"0".equals(jsonObject.get("errcode"))) {
 					log.error("获取用户信息失败 : " + jsonObject.toString());
 				} else {

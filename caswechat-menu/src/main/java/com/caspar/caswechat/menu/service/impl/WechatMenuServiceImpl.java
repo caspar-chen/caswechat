@@ -11,7 +11,7 @@ import com.caspar.caswechat.menu.service.WechatMenuService;
 import com.caspar.caswechat.start.service.AccessTokenService;
 import com.caspar.caswechat.util.general.HttpRequestUtil;
 import com.caspar.caswechat.util.general.PropertyUtil;
-import com.caspar.caswechat.util.general.StringUtil;
+import com.caspar.hoe.StringHoe;
 
 /**
  * @author caspar.chen
@@ -68,7 +68,7 @@ public class WechatMenuServiceImpl implements WechatMenuService {
 			String url = URL_MENU_GET.replace("ACCESS_TOKEN", token);
 			JSONObject jsonObject = HttpRequestUtil.createDefault().doGetToJsonObject(url);
 			if (null != jsonObject) {
-				if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
+				if (StringHoe.isNotEmpty(jsonObject.getString("errcode"))
 						&& !"0".equals(jsonObject.get("errcode"))) {
 					log.error("获取菜单信息失败 : " + jsonObject.toString());
 				} else {

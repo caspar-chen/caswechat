@@ -13,10 +13,13 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.io.Resource;
+
+import com.caspar.hoe.StringHoe;
 
 /**
  * 属性常量读取
@@ -145,9 +148,9 @@ public class PropertyUtil extends PropertyPlaceholderConfigurer {
 
 	public static void exportHeadedTo(Map<String,String> map,String keyStartWith){
 
-		if( StringUtil.isNotBlank(keyStartWith) ){
+		if( StringHoe.isNotEmpty(keyStartWith) ){
 			for( Entry<String,String> entry : CONSTS.entrySet() ){
-				if( StringUtil.startsWith(entry.getKey(), keyStartWith) ){
+				if(StringUtils.startsWith(entry.getKey(), keyStartWith) ){
 					map.put(entry.getKey(),entry.getValue());
 				}
 			}
@@ -161,8 +164,8 @@ public class PropertyUtil extends PropertyPlaceholderConfigurer {
 		return CONSTS.get(key);
 	}
 	public static Integer getInteger(String key){
-		String value = StringUtil.trim(CONSTS.get(key));
-		if( StringUtil.isBlank(value) ){
+		String value = StringHoe.trim(CONSTS.get(key));
+		if( StringHoe.isEmpty(value) ){
 			return null;
 		}
 		try{
@@ -180,8 +183,8 @@ public class PropertyUtil extends PropertyPlaceholderConfigurer {
 		}
 	}
 	public static Long getLong(String key){
-		String value = StringUtil.trim(CONSTS.get(key));
-		if( StringUtil.isBlank(value) ){
+		String value = StringHoe.trim(CONSTS.get(key));
+		if( StringHoe.isEmpty(value) ){
 			return null;
 		}
 		try{
@@ -199,8 +202,8 @@ public class PropertyUtil extends PropertyPlaceholderConfigurer {
 		}
 	}
 	public static Boolean getBoolean(String key){
-		String value = StringUtil.trim(CONSTS.get(key));
-		if( StringUtil.isBlank(value) ){
+		String value = StringHoe.trim(CONSTS.get(key));
+		if( StringHoe.isEmpty(value) ){
 			return null;
 		}
 		return Boolean.parseBoolean(value);
@@ -214,8 +217,8 @@ public class PropertyUtil extends PropertyPlaceholderConfigurer {
 		}
 	}
 	public static Double getDouble(String key) {
-		String value = StringUtil.trim(CONSTS.get(key));
-		if( StringUtil.isBlank(value) ){
+		String value = StringHoe.trim(CONSTS.get(key));
+		if( StringHoe.isEmpty(value) ){
 			return null;
 		}
 		return Double.parseDouble(value);

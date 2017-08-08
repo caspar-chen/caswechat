@@ -1,9 +1,11 @@
 package com.caspar.caswechat.util.general;
 
+import java.util.Formatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.alibaba.fastjson.JSONObject;
+import com.caspar.hoe.StringHoe;
 
 /**
  * 微信工具类
@@ -19,7 +21,7 @@ public class WechatUtil {
 	 * @return 替换好后的字符串
 	 */
 	public static String replaceEmoji(String source,String symbol) {  
-        if(StringUtil.isEmpty(source)){
+        if(StringHoe.isEmpty(source)){
         	return null;
         }
         Pattern emoji = Pattern.compile ("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]",Pattern.UNICODE_CASE | Pattern . CASE_INSENSITIVE ) ;
@@ -39,7 +41,7 @@ public class WechatUtil {
 		if(jsonObject == null){
 			return false;
 		}
-		if (StringUtil.isNotEmpty(jsonObject.getString("errcode"))
+		if (StringHoe.isNotEmpty(jsonObject.getString("errcode"))
 				&& !(jsonObject.getIntValue("errcode") == 0)) {
 			return false;
 		}
@@ -54,4 +56,17 @@ public class WechatUtil {
 	public static boolean isError(JSONObject jsonObject){
 		return !isSuccess(jsonObject);
 	}
+	
+	/**
+	 * byte 转为 16进制
+	 */
+	public static String byteToHex(final byte[] hash) {
+        Formatter formatter = new Formatter();
+        for (byte b : hash){
+            formatter.format("%02x", b);
+        }
+        String result = formatter.toString();
+        formatter.close();
+        return result;
+    }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.caspar.caswechat</groupId>
@@ -26,9 +25,16 @@
 		<module>caswechat-user</module>
 		<module>caswechat-js</module>
 		<module>caswechat-demo</module>
-	</modules>
+    <module>caswechat-message</module>
+  </modules>
 
 	<dependencies>
+	    <dependency>
+            <groupId>com.github.caspar-chen</groupId>
+            <artifactId>hoe</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
